@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+import SecretSantaMatch from './SecretSantaMatch';
 import '../css/SecretSantaMatchesTable.css';
 
 import { findWhere } from 'underscore';
@@ -11,14 +13,12 @@ class SecretSantaMatchesTable extends Component {
     participants.forEach((participant, index) => {
       const match = findWhere(assignedSecretSantas, { giver: participant.guid });
       const receiver = findWhere(participants, { guid: match.receiver });
-      console.log(receiver);
       matchesList.push(
-        <div
+        <SecretSantaMatch
           key={index}
-        >
-          <p>Gifter: {participant.name.first} {participant.name.last}</p>
-          <p>Receiver: {receiver.name.first} {receiver.name.last}</p>
-        </div>
+          giverName={participant.name}
+          receiver={receiver}
+        />
       );
     });
     return (
