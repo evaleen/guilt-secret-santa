@@ -1,15 +1,51 @@
-.app {
-  text-align: center;
-}
 
 .app-header {
   padding: 1rem;
-  color: #d94c53;
+  color: #D00000;
   font-family: 'Satisfy', cursive;
   margin: 0.5em 1em;
   text-align: left;
 }
 
-.app-intro {
-  font-size: large;
+.app-logo {
+  width: 60px;
+  height: 50px;
+  /* Rotate image so hat is tilted */
+  -ms-transform: rotate(325deg);
+  -webkit-transform: rotate(325deg);
+  transform: rotate(325deg);
+}
+
+.app-header h1 {
+  display: inline-block;
+}
+
+.app-content {
+  position: relative;
+  padding-left: 2rem;
+}
+
+.assign-button {
+  background-color: #d94c53;
+  color: #fff;
+  border: none;
+  padding: 1em;
+  border-radius: 5px;
+  cursor: pointer;
+  font-weight: bold;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.24), 0 4px 12px 0 rgba(0,0,0,0.19);
+}
+
+.assign-button:hover {
+  background-color: #d4333b;
+}
+
+.assign-button:focus {
+  outline: none;
+}
+
+.assign-button:active {
+  background-color: #d4333b;
+  box-shadow: 0 1px 2px 0 rgba(0,0,0,0.24), 0 4px 12px 0 rgba(0,0,0,0.19);
+  transform: translateY(2px);
 }
