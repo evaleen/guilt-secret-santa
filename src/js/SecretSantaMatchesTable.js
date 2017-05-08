@@ -38,7 +38,22 @@ class SecretSantaMatchesTable extends Component {
   }
 }
 SecretSantaMatchesTable.propTypes = {
-  participants: React.PropTypes.array.isRequired,
-  assignedSecretSantas: React.PropTypes.array.isRequired
+  participants: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      guid: React.PropTypes.string.isRequired,
+      name: React.PropTypes.shape({
+        first: React.PropTypes.string.isRequired,
+        last: React.PropTypes.string.isRequired
+      }).isRequired,
+      email: React.PropTypes.string.isRequired,
+      phone: React.PropTypes.string.isRequired
+    })
+  ).isRequired,
+  assignedSecretSantas: React.PropTypes.arrayOf(
+    React.PropTypes.shape({
+      giver: React.PropTypes.string.isRequired,
+      receiver: React.PropTypes.string.isRequired
+    })
+  ).isRequired,
 }
 export default SecretSantaMatchesTable;
