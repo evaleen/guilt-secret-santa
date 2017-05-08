@@ -14,6 +14,7 @@ class SecretSantaMatch extends Component {
         <div className="giver-name">
           {this.formatName(giverName)}
         </div>
+        <p className="hover-message">Hover to see!</p>
         <div className="receiver-details">
         {this.formatName(receiver.name)}
         <p>{receiver.email}</p>
