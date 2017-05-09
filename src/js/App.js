@@ -62,13 +62,12 @@ class App extends Component {
   }
 
   maybeShowMatchesTable() {
-    console.log(this.state);
     const { showMatches, filteredSecretSantas } = this.state;
     if(showMatches) {
       return (
         <SecretSantaMatchesTable
           participants={Users.users}
-          assignedSecretSantas={filteredSecretSantas}
+          secretSantas={filteredSecretSantas}
         />
       )
     }
