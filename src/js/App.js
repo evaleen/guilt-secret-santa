@@ -57,7 +57,7 @@ class App extends Component {
       return (
         <div className="intro">
           <p>Welcome to Secret Santa!</p>
-          <p>Peope in the group are randomly assigned another person, and they will have to buy them a Christmas Gift.</p>
+          <p>People in the group are randomly assigned another person, and they will have to buy them a Christmas gift.</p>
           <p>The gift receivers contact details are included so you can let them know when you have their gift.</p>
           <p>Click the button above to get started.</p>
         </div>
