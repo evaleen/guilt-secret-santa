@@ -22,6 +22,7 @@ class App extends Component {
       showMatches: false,
     };
     this.assignSecretSantas = this.assignSecretSantas.bind(this);
+    this.maybeShowIntro = this.maybeShowIntro.bind(this);
     this.maybeShowMatchesTable = this.maybeShowMatchesTable.bind(this);
     this.maybeShowSearchBar = this.maybeShowSearchBar.bind(this);
     this.refineSearch = this.refineSearch.bind(this);
@@ -47,7 +48,21 @@ class App extends Component {
       assignedSecretSantas: matches,
       filteredSecretSantas: matches,
       showMatches: true,
-    })
+    });
+  }
+
+  maybeShowIntro() {
+    const { showMatches } = this.state;
+    if (!showMatches) {
+      return (
+        <div className="intro">
+          <p>Welcome to Secret Santa!</p>
+          <p>Peope in the group are randomly assigned another person, and they will have to buy them a Christmas Gift.</p>
+          <p>The gift receivers contact details are included so you can let them know when you have their gift.</p>
+          <p>Click the button above to get started.</p>
+        </div>
+      );
+    }
   }
 
   maybeShowSearchBar() {
@@ -103,6 +118,7 @@ class App extends Component {
           >
             {buttonText}
           </button>
+          {this.maybeShowIntro()}
           {this.maybeShowSearchBar()}
           {this.maybeShowMatchesTable()}
         </div>
