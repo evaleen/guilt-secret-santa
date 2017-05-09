@@ -95,7 +95,7 @@ class App extends Component {
       const filteredSecretSantas = assignedSecretSantas.filter(secretSanta => {
         const giver = findWhere(Users.users, { guid: secretSanta.giver });
         const name = `${giver.name.first} ${giver.name.last}`.toLowerCase();
-        return name.includes(value.toLowerCase());
+        return name.indexOf(value.toLowerCase()) > -1;
       });
       this.setState({ filteredSecretSantas });
     } else {
