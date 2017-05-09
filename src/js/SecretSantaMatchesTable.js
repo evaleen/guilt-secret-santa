@@ -1,22 +1,21 @@
 import React, { Component } from 'react';
 
 import SecretSantaMatch from './SecretSantaMatch';
-import '../css/SecretSantaMatchesTable.css';
 
 import { findWhere } from 'underscore';
 
 class SecretSantaMatchesTable extends Component {
 
   renderMatches() {
-    const { participants, assignedSecretSantas } = this.props;
+    const { participants, secretSantas } = this.props;
     const matchesList = [];
-    participants.forEach((participant, index) => {
-      const match = findWhere(assignedSecretSantas, { giver: participant.guid });
+    secretSantas.forEach((match, index) => {
+      const giver = findWhere(participants, { guid: match.giver });
       const receiver = findWhere(participants, { guid: match.receiver });
       matchesList.push(
         <SecretSantaMatch
           key={index}
-          giverName={participant.name}
+          giverName={giver.name}
           receiver={receiver}
         />
       );
@@ -49,7 +48,7 @@ SecretSantaMatchesTable.propTypes = {
       phone: React.PropTypes.string.isRequired
     })
   ).isRequired,
-  assignedSecretSantas: React.PropTypes.arrayOf(
+  secretSantas: React.PropTypes.arrayOf(
     React.PropTypes.shape({
       giver: React.PropTypes.string.isRequired,
       receiver: React.PropTypes.string.isRequired

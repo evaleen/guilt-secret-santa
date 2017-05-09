@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import SecretSantaMatchesTable from './SecretSantaMatchesTable';
+import SearchBar from './SearchBar';
 import logo from '../img/logo.png';
 import '../css/App.css';
 import Users from '../json/users.json';
-import { pluck } from 'underscore';
+import { pluck, isEmpty, findWhere } from 'underscore';
 
 const buttonTexts = {
   ASSIGN: 'Assign Secret Santas',
@@ -17,10 +18,13 @@ class App extends Component {
     this.state = {
       buttonText: buttonTexts.ASSIGN,
       assignedSecretSantas: [],
+      filteredSecretSantas: [],
       showMatches: false,
     };
     this.assignSecretSantas = this.assignSecretSantas.bind(this);
     this.maybeShowMatchesTable = this.maybeShowMatchesTable.bind(this);
+    this.maybeShowSearchBar = this.maybeShowSearchBar.bind(this);
+    this.refineSearch = this.refineSearch.bind(this);
   }
 
   assignSecretSantas() {
@@ -41,21 +45,48 @@ class App extends Component {
     this.setState({
       buttonText: buttonTexts.REASSIGN,
       assignedSecretSantas: matches,
+      filteredSecretSantas: matches,
       showMatches: true,
     })
   }
 
+  maybeShowSearchBar() {
+    const { showMatches } = this.state;
+    if (showMatches) {
+      return (
+        <SearchBar
+          refineSearch={this.refineSearch}
+        />
+      );
+    }
+  }
+
   maybeShowMatchesTable() {
-    const { showMatches, assignedSecretSantas } = this.state;
+    console.log(this.state);
+    const { showMatches, filteredSecretSantas } = this.state;
     if(showMatches) {
       return (
         <SecretSantaMatchesTable
           participants={Users.users}
-          assignedSecretSantas={assignedSecretSantas}
+          assignedSecretSantas={filteredSecretSantas}
         />
       )
     }
     return null;
+  }
+
+  refineSearch({ target: { value } }) {
+    const { assignedSecretSantas } = this.state;
+    if(!isEmpty(value)) {
+      const filteredSecretSantas = assignedSecretSantas.filter(secretSanta => {
+        const giver = findWhere(Users.users, { guid: secretSanta.giver });
+        const name = `${giver.name.first} ${giver.name.last}`.toLowerCase();
+        return name.includes(value.toLowerCase());
+      });
+      this.setState({ filteredSecretSantas });
+    } else {
+      this.setState({ filteredSecretSantas: assignedSecretSantas });
+    }
   }
 
   render() {
@@ -73,6 +104,7 @@ class App extends Component {
           >
             {buttonText}
           </button>
+          {this.maybeShowSearchBar()}
           {this.maybeShowMatchesTable()}
         </div>
       </div>
