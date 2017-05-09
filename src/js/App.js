@@ -74,6 +74,7 @@ class App extends Component {
         />
       );
     }
+    return null;
   }
 
   maybeShowMatchesTable() {
