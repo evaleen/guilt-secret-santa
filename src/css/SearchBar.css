@@ -5,3 +5,13 @@
 .search-input {
   padding: 0.25rem;
 }
+
+@media only screen and (max-width: 720px) {
+    .search-bar {
+        float: none;
+        padding-top: 15px;
+    }
+    .search-input {
+      width: 70%;
+    }
+}

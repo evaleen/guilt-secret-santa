@@ -23,7 +23,8 @@
 .app-content {
   position: relative;
   padding-left: 2rem;
-  width: 40em;
+  width: 55%;
+  min-width: 250px;
 }
 
 .assign-button {
